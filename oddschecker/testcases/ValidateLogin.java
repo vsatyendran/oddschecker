@@ -3,8 +3,10 @@
  */
 package com.oddschecker.testcases;
 
+import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +24,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
  */
 public class ValidateLogin {
 
-		public static void main(String[] args) throws MalformedURLException{
+		public static void main(String[] args) throws MalformedURLException, Throwable{
 			
 		DesiredCapabilities capabilities = DesiredCapabilities.android();
 		capabilities.setCapability(MobileCapabilityType.BROWSER_NAME,BrowserType.CHROME);
@@ -34,13 +36,19 @@ public class ValidateLogin {
 			
 		@SuppressWarnings("rawtypes")
 		WebDriver driver = new AndroidDriver(url,capabilities);
-		driver.get("http://m.oddschecker.com");
+		
+		Properties prop = new Properties();
+		FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\com\\oddschecker\\config.properties");
+		prop.load(ip);	
+		
+		driver.get(prop.getProperty("url"));
+		
 		LoginPage login = new LoginPage(driver);
 		
 		login.clickLogin();
 		login.clickLeftmenu();
-		login.typeuser("vendan.satyendran@gmail.com");
-		login.typepass("Password1");
+		login.typeuser(prop.getProperty("username"));
+		login.typepass(prop.getProperty("password"));
 		login.clickbutton();
 		
 		driver.quit();
