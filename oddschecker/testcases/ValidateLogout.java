@@ -12,6 +12,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
 
 import com.oddschecker.login.LoginPage;
 
@@ -22,6 +23,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
  * @author Vendan
  *
  */
+@Test
 public class ValidateLogout {
 
 	public static void main(String[] args) throws MalformedURLException, Throwable{
